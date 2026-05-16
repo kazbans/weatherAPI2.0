@@ -20,8 +20,15 @@ namespace WeatherAPI.Controllers
         [HttpGet("{city}")]
         public async Task<ActionResult<WeatherResponse>> GetWeather(string city)
         {
-            var weather = await _weatherService.GetWeather(city);
-            return Ok(weather);
+            try
+            {
+                var weather = await _weatherService.GetWeather(city);
+                return Ok(weather);
+            }
+            catch (HttpRequestException ex) when (ex.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return NotFound(new { message = $"City {city} not found" });
+            }
         }
     }
 }

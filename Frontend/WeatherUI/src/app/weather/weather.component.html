@@ -1,10 +1,14 @@
-@if (weatherData(); as data) {
+@if(errorMessage()){
+  <div class="weather-container">
+    <p class="text">{{ errorMessage() }}</p>
+  </div>
+} @else if (weatherData(); as data) {
   <div class="weather-container">
     <h2 class="city-name">{{ data.city | titlecase }}</h2>
     <p class="text">{{ data.message }}</p>
   </div>
 } @else {
   <div class="weather-container">
-    <p class="text">Завантаження погоди</p>
+    <p class="text">Loading...</p>
   </div>
 }

@@ -15,13 +15,19 @@ export class WeatherComponent implements OnInit {
   private route = inject(ActivatedRoute);
 
   weatherData = signal<WeatherResponse | undefined>(undefined);
+  errorMessage = signal<string | undefined>(undefined);
 
   ngOnInit() {
 
     const city = this.route.snapshot.paramMap.get('city') || 'lviv';
 
-    this.weatherService.getWeather(city).subscribe((response) => {
-      this.weatherData.set(response);
+    this.weatherService.getWeather(city).subscribe({
+      next: (response) => {
+        this.weatherData.set(response);
+      },
+      error: (error) => {
+        this.errorMessage.set('Not found weather data for the specified city');
+      }
     });
   }
 }

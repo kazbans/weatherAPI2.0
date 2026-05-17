@@ -1,1 +1,10 @@
-<p>weather works!</p>
+@if (weatherData) {
+  <div class="weather-container">
+    <h2 class="city-name">{{ weatherData.city }}</h2>
+    <p class="text">{{ weatherData.message }}</p>
+  </div>
+} @else {
+  <div class="weather-container">
+    <p class="text">Завантаження погоди</p>
+  </div>
+}

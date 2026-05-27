@@ -4,6 +4,7 @@ namespace Weather.Models;
 
 public class WeatherResponse
 {
+    public int Id { get; set; }
     public string City { get; set; }
     public double Temperature { get; set; }
     public string Message { get; set; }

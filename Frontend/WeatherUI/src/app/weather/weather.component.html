@@ -4,15 +4,18 @@
   </div>
 } @else if (weatherData(); as data) {
   <div class="weather-container">
-      <div class="weather-icon">
-      @if (data.temperature > 5) {
-        <img src="assets/sun.jpg" alt="Sunny">
-      } @else {
-        <img src="assets/cloud.jpg" alt="Cloudy">
-      }
+    <div class="weather-icon">
+    @if (data.temperature > 5) {
+      <img src="assets/sun.jpg" alt="Sunny">
+    } @else {
+      <img src="assets/cloud.jpg" alt="Cloudy">
+    }
     </div>
     <h2 class="city-name">{{ data.city | titlecase }}</h2>
     <p class="text">{{ data.message }}</p>
+    <div>
+      <button (click)="saveWeather()">Save to db</button>
+    </div>
   </div>
 } @else {
   <div class="weather-container">

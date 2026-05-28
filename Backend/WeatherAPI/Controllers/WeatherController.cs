@@ -30,5 +30,12 @@ namespace WeatherAPI.Controllers
                 return NotFound(new { message = $"City {city} not found" });
             }
         }
+        [HttpPost("{city}")]
+        public async Task<ActionResult<WeatherResponse>> SaveWeather(string city)
+        {
+            await _weatherService.SaveWeather(city);
+            return Ok();
+        }
+
     }
 }

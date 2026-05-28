@@ -15,7 +15,12 @@
     <p class="text">{{ data.message }}</p>
     <div>
       <button (click)="saveWeather()">Save to db</button>
+      <button (click)="getAverageTemperature()">Get average temperature</button>
     </div>
+    @if (averageTemperature() != undefined){
+      <p class="text">Average temperature: {{ averageTemperature() }}°C</p>
+    }
+
   </div>
 } @else {
   <div class="weather-container">

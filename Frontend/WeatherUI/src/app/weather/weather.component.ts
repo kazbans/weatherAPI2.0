@@ -17,6 +17,7 @@ export class WeatherComponent implements OnInit {
   weatherData = signal<WeatherResponse | undefined>(undefined);
   errorMessage = signal<string | undefined>(undefined);
   currentCity = signal<string>('');
+  averageTemperature = signal<number | undefined>(undefined);
 
   ngOnInit() {
     const city = this.route.snapshot.paramMap.get('city') || 'lviv';
@@ -35,5 +36,14 @@ export class WeatherComponent implements OnInit {
   saveWeather() {
     const city = this.currentCity();
     this.weatherService.saveWeather(city).subscribe();
+  }
+
+  getAverageTemperature() {
+    const city = this.currentCity();
+    this.weatherService.getAverageTemperature(city).subscribe({
+      next: (response) => {
+        this.averageTemperature.set(response.averageTemperature);
+      }
+    });
   }
 }

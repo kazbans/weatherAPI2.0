@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { WeatherResponse } from '../interfaces/weather.interface';
+import { AverageTemperatureResponse, WeatherResponse } from '../interfaces/weather.interface';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -15,5 +15,9 @@ export class WeatherService {
 
   saveWeather(city: string){
     return this.http.post(`https://localhost:7127/api/Weather/${city}`, {});
+  }
+
+  getAverageTemperature(city: string) {
+    return this.http.get<AverageTemperatureResponse>(`https://localhost:7127/api/Weather/${city}/average`);
   }
 }

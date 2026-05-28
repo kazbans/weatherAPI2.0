@@ -3,3 +3,8 @@ export interface WeatherResponse {
     temperature: number;
     message: string;
 }
+
+export interface AverageTemperatureResponse {
+    city: string;
+    averageTemperature: number;
+}

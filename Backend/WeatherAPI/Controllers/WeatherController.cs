@@ -31,11 +31,17 @@ namespace WeatherAPI.Controllers
             }
         }
         [HttpPost("{city}")]
-        public async Task<ActionResult<WeatherResponse>> SaveWeather(string city)
+        public async Task<ActionResult> SaveWeather(string city)
         {
             await _weatherService.SaveWeather(city);
             return Ok();
         }
 
+        [HttpGet("{city}/average")]
+        public async Task<ActionResult<AverageTempResponse>> GetAverageTemp(string city)
+        {
+            var response = await _weatherService.GetAverageTemp(city);
+            return Ok(response);
+        }
     }
 }

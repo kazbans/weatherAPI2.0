@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
 using Weather.Models;
 using WeatherAPI.Data;
 
@@ -40,12 +41,26 @@ public class WeatherService : IWeatherService
         };
     }
 
-    public async Task<WeatherResponse> SaveWeather(string city)
+    public async Task SaveWeather(string city)
     {
         var newWeather = await GetWeather(city);
 
         _context.Add(newWeather);
         await _context.SaveChangesAsync();
-        return newWeather;
     }
+
+    public async Task<AverageTempResponse> GetAverageTemp(string city)
+    {
+        var averWeather = _context.Weather.Where(t => t.City == city);
+        
+        double averTemp = await averWeather.AverageAsync(w => w.Temperature);
+
+        return new AverageTempResponse
+        {
+            City = city,
+            AverageTemperature = averTemp
+        };
+    }
+
+
 }

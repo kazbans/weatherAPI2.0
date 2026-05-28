@@ -21,3 +21,9 @@ public class MainInfo
     [JsonPropertyName("temp")]
     public double Temp { get; set; }
 }
+
+public class AverageTempResponse
+{
+    public string City { get; set; }
+    public double AverageTemperature { get; set; }
+}

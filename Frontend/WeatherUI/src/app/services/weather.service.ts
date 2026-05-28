@@ -10,14 +10,14 @@ export class WeatherService {
   constructor(private http: HttpClient) {}
 
   getWeather(city: string){
-    return this.http.get<WeatherResponse>(`https://localhost:7127/api/Weather/${city}`);
+    return this.http.get<WeatherResponse>(`/api/Weather/${city}`);
   }
 
   saveWeather(city: string){
-    return this.http.post(`https://localhost:7127/api/Weather/${city}`, {});
+    return this.http.post(`/api/Weather/${city}`, {});
   }
 
   getAverageTemperature(city: string) {
-    return this.http.get<AverageTemperatureResponse>(`https://localhost:7127/api/Weather/${city}/average`);
+    return this.http.get<AverageTemperatureResponse>(`/api/Weather/${city}/average`);
   }
 }

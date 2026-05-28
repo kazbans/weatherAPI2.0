@@ -1,0 +1,24 @@
+services:
+  db:
+    image: postgres:latest
+    container_name: postgres_db
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=12345
+      - POSTGRES_DB=WeatherDb
+    volumes:
+      - postgres_data:/var/lib/postgresql/
+  
+  app:
+    build: .
+    container_name: weather_app
+    ports:
+      - "8080:8080"
+    environment:
+      - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Database=WeatherDb;Username=postgres;Password=12345
+    depends_on:
+      - db
+volumes:
+  postgres_data:
